@@ -1,0 +1,13 @@
+Hybrid retrieval combines two search methods:
+
+1. Full-text search (FTS)
+2. Vector similarity search
+
+FTS works well for exact keyword matches.
+Vector search works well for semantic similarity.
+
+Reranking improves the final ordering of retrieved results by comparing the query with candidate chunks.
+
+Grounding checks verify whether the generated answer is supported by retrieved evidence.
+
+This system is called Agentic SQL RAG because it combines an agent workflow, SQL storage, and retrieval augmented generation.

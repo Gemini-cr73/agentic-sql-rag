@@ -1,0 +1,17 @@
+{
+  "k": 5,
+  "alpha": 0.6,
+  "modes": {
+    "hybrid": {
+      "precision_at_k": 0.8,
+      "recall_at_k": 0.8125,
+      "mrr": 1.0,
+      "ndcg": 0.7504348109348218,
+      "num_queries": 2
+    }
+  },
+  "rerank": true,
+  "rerank_method": "ml",
+  "rerank_weight": 0.15,
+  "rerank_top_k": 5
+}

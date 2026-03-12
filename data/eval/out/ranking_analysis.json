@@ -1,0 +1,184 @@
+{
+  "k": 5,
+  "alpha": 0.6,
+  "rerank": true,
+  "rerank_method": "ml",
+  "rerank_weight": 0.15,
+  "rerank_top_k": 5,
+  "runs": [
+    {
+      "mode": "hybrid",
+      "per_query": [
+        {
+          "qid": "q1",
+          "query": "vector",
+          "metrics": {
+            "k": 5,
+            "precision_at_k": 0.6,
+            "recall_at_k": 1.0,
+            "mrr": 1.0,
+            "ndcg": 0.8145672023038535
+          },
+          "retrieved": [
+            {
+              "stable_id": "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+              "hybrid_score": 1.0,
+              "fts_score": 0.06079271,
+              "vector_score": 0.08148152676870693,
+              "rerank_method": "ml",
+              "rerank_score": 0.865,
+              "base_score": 1.0,
+              "final_score": 1.12975
+            },
+            {
+              "stable_id": "5c919642b839bf78be62adc958175e0d2f9ae02b",
+              "hybrid_score": 0.6,
+              "fts_score": 0.06079271,
+              "vector_score": 0.0,
+              "rerank_method": "ml",
+              "rerank_score": 0.975,
+              "base_score": 0.6,
+              "final_score": 0.74625
+            },
+            {
+              "stable_id": "47197f7384e7ba0133a81844791508d4b4a53019",
+              "hybrid_score": 0.6,
+              "fts_score": 0.06079271,
+              "vector_score": 0.0,
+              "rerank_method": "ml",
+              "rerank_score": 0.975,
+              "base_score": 0.6,
+              "final_score": 0.74625
+            },
+            {
+              "stable_id": "pytest-4accc71c-0000",
+              "hybrid_score": 0.39926367153433784,
+              "fts_score": 0.0,
+              "vector_score": 0.0813315338497434,
+              "rerank_method": "ml",
+              "rerank_score": 0.0,
+              "base_score": 0.39926367153433784,
+              "final_score": 0.39926367153433784
+            },
+            {
+              "stable_id": "pytest-47d5dd5d-0000",
+              "hybrid_score": 0.39926367153433784,
+              "fts_score": 0.0,
+              "vector_score": 0.0813315338497434,
+              "rerank_method": "ml",
+              "rerank_score": 0.0,
+              "base_score": 0.39926367153433784,
+              "final_score": 0.39926367153433784
+            }
+          ],
+          "relevant": {
+            "47197f7384e7ba0133a81844791508d4b4a53019": 2,
+            "5c919642b839bf78be62adc958175e0d2f9ae02b": 2,
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd": 1
+          },
+          "pre_rerank_ids": [
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+            "47197f7384e7ba0133a81844791508d4b4a53019",
+            "5c919642b839bf78be62adc958175e0d2f9ae02b",
+            "pytest-47d5dd5d-0000",
+            "pytest-4accc71c-0000"
+          ],
+          "post_rerank_ids": [
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+            "5c919642b839bf78be62adc958175e0d2f9ae02b",
+            "47197f7384e7ba0133a81844791508d4b4a53019",
+            "pytest-4accc71c-0000",
+            "pytest-47d5dd5d-0000"
+          ]
+        },
+        {
+          "qid": "q2",
+          "query": "hybrid retrieval",
+          "metrics": {
+            "k": 5,
+            "precision_at_k": 1.0,
+            "recall_at_k": 0.625,
+            "mrr": 1.0,
+            "ndcg": 0.6863024195657901
+          },
+          "retrieved": [
+            {
+              "stable_id": "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+              "hybrid_score": 0.998824143440503,
+              "fts_score": 0.19353974,
+              "vector_score": 0.07870654661142068,
+              "rerank_method": "ml",
+              "rerank_score": 1.0,
+              "base_score": 0.998824143440503,
+              "final_score": 1.1488241434405029
+            },
+            {
+              "stable_id": "pytest-ae83189f-0000",
+              "hybrid_score": 0.7053662932480947,
+              "fts_score": 0.098500855,
+              "vector_score": 0.07893859778141762,
+              "rerank_method": "ml",
+              "rerank_score": 1.0,
+              "base_score": 0.7053662932480947,
+              "final_score": 0.8553662932480948
+            },
+            {
+              "stable_id": "pytest-50310b0b-0000",
+              "hybrid_score": 0.7053662932480947,
+              "fts_score": 0.098500855,
+              "vector_score": 0.07893859778141762,
+              "rerank_method": "ml",
+              "rerank_score": 1.0,
+              "base_score": 0.7053662932480947,
+              "final_score": 0.8553662932480948
+            },
+            {
+              "stable_id": "pytest-4accc71c-0000",
+              "hybrid_score": 0.7053662932480947,
+              "fts_score": 0.098500855,
+              "vector_score": 0.07893859778141762,
+              "rerank_method": "ml",
+              "rerank_score": 1.0,
+              "base_score": 0.7053662932480947,
+              "final_score": 0.8553662932480948
+            },
+            {
+              "stable_id": "pytest-47d5dd5d-0000",
+              "hybrid_score": 0.7053662932480947,
+              "fts_score": 0.098500855,
+              "vector_score": 0.07893859778141762,
+              "rerank_method": "ml",
+              "rerank_score": 1.0,
+              "base_score": 0.7053662932480947,
+              "final_score": 0.8553662932480948
+            }
+          ],
+          "relevant": {
+            "47197f7384e7ba0133a81844791508d4b4a53019": 2,
+            "5c919642b839bf78be62adc958175e0d2f9ae02b": 2,
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd": 2,
+            "pytest-47d5dd5d-0000": 1,
+            "pytest-4accc71c-0000": 1,
+            "pytest-50310b0b-0000": 1,
+            "pytest-ae83189f-0000": 1,
+            "pytest-ed33498c-0000": 1
+          },
+          "pre_rerank_ids": [
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+            "pytest-47d5dd5d-0000",
+            "pytest-4accc71c-0000",
+            "pytest-50310b0b-0000",
+            "pytest-ae83189f-0000"
+          ],
+          "post_rerank_ids": [
+            "709d700ff9c2f5cd542174a2115c7dad5dd794fd",
+            "pytest-ae83189f-0000",
+            "pytest-50310b0b-0000",
+            "pytest-4accc71c-0000",
+            "pytest-47d5dd5d-0000"
+          ]
+        }
+      ]
+    }
+  ]
+}

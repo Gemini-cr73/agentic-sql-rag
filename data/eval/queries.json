@@ -1,0 +1,10 @@
+[
+  {
+    "qid": "q1",
+    "query": "vector"
+  },
+  {
+    "qid": "q2",
+    "query": "hybrid retrieval"
+  }
+]

@@ -1,0 +1,6 @@
+Artificial intelligence systems can use hybrid retrieval methods
+combining full text search and vector similarity to find relevant
+information inside large document collections.
+
+Hybrid retrieval improves recall and ranking quality when compared
+to traditional keyword search alone.

@@ -1,0 +1,63 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: agentic_sql_rag_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ragdb
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+    ports:
+      - "55432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag -d ragdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: agentic_sql_rag_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://rag:rag@db:5432/ragdb
+      API_BASE_URL: http://api:8000
+      LOG_LEVEL: info
+      UVICORN_LOG_LEVEL: info
+      SQLALCHEMY_LOG_LEVEL: WARNING
+      PORT: 8000
+      WEBSITES_PORT: 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: agentic_sql_rag_ui
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
+    environment:
+      API_BASE_URL: http://api:8000
+      PORT: 8501
+      WEBSITES_PORT: 8501
+      STREAMLIT_SERVER_PORT: 8501
+      STREAMLIT_SERVER_ADDRESS: 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata:
