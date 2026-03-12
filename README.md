@@ -138,19 +138,27 @@ This architecture provides:
 
 ### Streamlit UI — Retrieval Dashboard
 
-![Streamlit UI](docs/screenshots/ui-dashboard.png)
+<p align="center">
+<img src="docs/screenshots/ui-dashboard.png" width="900">
+</p>
 
 ### Query Results with Evidence
 
-![Retrieval Results](docs/screenshots/retrieval-results.png)
+<p align="center">
+<img src="docs/screenshots/retrieval-results.png" width="900">
+</p>
 
 ### Evaluation Dashboard
 
-![Evaluation Dashboard](docs/screenshots/evaluation-dashboard.png)
+<p align="center">
+<img src="docs/screenshots/evaluation-dashboard.png" width="900">
+</p>
 
 ### FastAPI Swagger Documentation
 
-![API Docs](docs/screenshots/api-docs.png)
+<p align="center">
+<img src="docs/screenshots/api-docs.png" width="900">
+</p>
 
 # 🧰 Technology Stack
 
