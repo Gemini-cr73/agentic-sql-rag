@@ -134,7 +134,7 @@ This architecture provides:
 - reproducible infrastructure
 - scalable cloud hosting
 
-# 🖼️ Application Screenshots
+## 🖼️ Application Screenshots
 
 ### Streamlit UI — Retrieval Dashboard
 
