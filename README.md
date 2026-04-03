@@ -19,10 +19,10 @@ The system combines **document ingestion, hybrid retrieval, reranking, evidence 
 
 # 🌐 Live App URLs
 
-- **UI (Streamlit):** https://rag.ai-coach-lab.com  
-- **API (FastAPI):** https://api-rag.ai-coach-lab.com  
-- **API Docs (Swagger):** https://api-rag.ai-coach-lab.com/docs  
-- **Health:** https://api-rag.ai-coach-lab.com/health  
+- **UI:** https://rag.ai-coach-lab.com  
+- **API:** https://api-rag.ai-coach-lab.com  
+- **API Docs:** https://api-rag.ai-coach-lab.com/docs  
+- **Health Check:** https://api-rag.ai-coach-lab.com/health  
 
 > These interfaces exist primarily for **demonstration and reproducibility**.  
 > The core contribution is the **retrieval architecture and evaluation system**.
