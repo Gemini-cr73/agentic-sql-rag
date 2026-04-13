@@ -17,11 +17,11 @@ The system combines **document ingestion, hybrid retrieval, reranking, evidence 
   <img src="https://img.shields.io/badge/Cloud-Azure_App_Service-0078D4?style=for-the-badge&logo=microsoftazure" />
 </p>
 
-# 🌐 Live App URLs
+## 🌐 Live App URLs
 
-- **UI:** https://rag.ai-coach-lab.com  
-- **API:** https://api-rag.ai-coach-lab.com  
-- **API Docs:** https://api-rag.ai-coach-lab.com/docs  
+- **UI:** https://crb-agentic-sql-rag.streamlit.app  
+- **API Base:** https://api-rag.ai-coach-lab.com  
+- **API Docs (Swagger):** https://api-rag.ai-coach-lab.com/docs  
 - **Health Check:** https://api-rag.ai-coach-lab.com/health  
 
 > These interfaces exist primarily for **demonstration and reproducibility**.  
