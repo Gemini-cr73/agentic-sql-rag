@@ -8,7 +8,11 @@ from typing import Any
 import requests
 import streamlit as st
 
-DEFAULT_API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
+DEFAULT_API_BASE_URL = "https://api-rag.ai-coach-lab.com"
+API_BASE_URL = st.secrets.get(
+    "API_BASE_URL",
+    os.getenv("API_BASE_URL", DEFAULT_API_BASE_URL),
+).rstrip("/")
 
 # -----------------------------
 # Paths / logo loading
@@ -34,7 +38,7 @@ st.set_page_config(
 # Helpers
 # -----------------------------
 def _normalize_base_url(url: str) -> str:
-    return (url or DEFAULT_API_BASE_URL).strip().rstrip("/")
+    return (url or API_BASE_URL).strip().rstrip("/")
 
 
 def _post_json(
@@ -460,7 +464,7 @@ st.sidebar.caption(
     "A professional retrieval and grounding interface for indexed documents, evidence inspection, ranking analysis, and evaluation tracking."
 )
 
-api_base_url = st.sidebar.text_input("API Base URL", value=DEFAULT_API_BASE_URL)
+api_base_url = st.sidebar.text_input("API Base URL", value=API_BASE_URL)
 api_base_url = _normalize_base_url(api_base_url)
 
 ask_url = f"{api_base_url}/ask"

@@ -1,4 +1,3 @@
-# app/main.py
 from __future__ import annotations
 
 import logging
@@ -18,17 +17,41 @@ from app.api.evaluation import router as evaluation_router
 from app.api.retrieve import router as retrieve_router
 from app.core.logging import setup_logging
 
-# ---------------------------------------------------------
-# Logging
-# ---------------------------------------------------------
 setup_logging()
 log = logging.getLogger("app.main")
+
+
+def _build_allowed_origins() -> list[str]:
+    origins = [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:8501",
+        "http://127.0.0.1:8501",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
+    env_origins = os.getenv("ALLOWED_ORIGINS", "").strip()
+    if env_origins:
+        extra = [o.strip() for o in env_origins.split(",") if o.strip()]
+        origins.extend(extra)
+
+    # de-duplicate while preserving order
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for origin in origins:
+        if origin not in seen:
+            deduped.append(origin)
+            seen.add(origin)
+
+    return deduped
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db_url = os.getenv("DATABASE_URL")
     api_base_url = os.getenv("API_BASE_URL", "not-set")
+    allowed_origins = os.getenv("ALLOWED_ORIGINS", "not-set")
 
     log.info("[startup] Agentic SQL RAG API starting")
     log.info("[startup] PID=%s", os.getpid())
@@ -36,8 +59,9 @@ async def lifespan(app: FastAPI):
     log.info("[startup] CWD=%s", os.getcwd())
     log.info("[startup] DATABASE_URL set? %s", "YES" if db_url else "NO")
     log.info("[startup] API_BASE_URL=%s", api_base_url)
+    log.info("[startup] ALLOWED_ORIGINS=%s", allowed_origins)
     log.info(
-        "[startup] Expected routes: /health, /ask, /agent/ask, "
+        "[startup] Expected routes: /, /health, /ask, /agent/ask, "
         "/documents, /documents/upload, /retrieval/retrieve, "
         "/evaluation/summary, /evaluation/runs, /docs"
     )
@@ -59,15 +83,8 @@ app = FastAPI(
 )
 
 
-# ---------------------------------------------------------
-# Global exception handler
-# ---------------------------------------------------------
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
-    """
-    Always return JSON for unexpected exceptions so the Streamlit frontend
-    can display readable backend errors instead of blank failures.
-    """
     tb = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     log.exception(
         "[error] Unhandled exception on %s %s\n%s",
@@ -86,30 +103,17 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 
-# ---------------------------------------------------------
-# CORS
-# ---------------------------------------------------------
-allowed_origins = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:8501",
-    "http://127.0.0.1:8501",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+allowed_origins = _build_allowed_origins()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# ---------------------------------------------------------
-# Routers
-# ---------------------------------------------------------
 app.include_router(retrieve_router, prefix="/retrieval", tags=["retrieval"])
 app.include_router(ask_router, tags=["generation"])
 app.include_router(agent_router, tags=["agent"])
@@ -117,9 +121,6 @@ app.include_router(documents_router)
 app.include_router(evaluation_router, tags=["evaluation"])
 
 
-# ---------------------------------------------------------
-# Basic routes
-# ---------------------------------------------------------
 @app.get("/")
 def root():
     return {
