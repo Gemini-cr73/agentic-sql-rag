@@ -14,7 +14,8 @@ The system combines **document ingestion, hybrid retrieval, reranking, evidence 
   <img src="https://img.shields.io/badge/UI-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit" />
   <img src="https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql" />
   <img src="https://img.shields.io/badge/Retrieval-Hybrid_Search-black?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Cloud-Azure_App_Service-0078D4?style=for-the-badge&logo=microsoftazure" />
+  <img src="https://img.shields.io/badge/Backend-Railway-0B0D0E?style=for-the-badge&logo=railway" />
+  <img src="https://img.shields.io/badge/Frontend-Streamlit_Cloud-FF4B4B?style=for-the-badge&logo=streamlit" />
 </p>
 
 ## 🌐 Live App URLs
@@ -26,6 +27,8 @@ The system combines **document ingestion, hybrid retrieval, reranking, evidence 
 
 > These interfaces exist primarily for **demonstration and reproducibility**.  
 > The core contribution is the **retrieval architecture and evaluation system**.
+
+---
 
 # 📌 Project Motivation
 
@@ -48,9 +51,11 @@ Agentic SQL RAG addresses these problems by providing:
 
 The goal is to treat RAG systems as **engineering systems that can be measured and improved**, not just prompt-based demos.
 
+---
+
 # 🧠 Retrieval Engineering Contributions
 
-### Document Ingestion
+## Document Ingestion
 
 The system supports ingestion of structured text documents with:
 
@@ -59,7 +64,7 @@ The system supports ingestion of structured text documents with:
 - deterministic chunk identifiers
 - character offsets for evidence grounding
 
-### Hybrid Retrieval Engine
+## Hybrid Retrieval Engine
 
 The system combines **two retrieval approaches**:
 
@@ -71,7 +76,7 @@ The system combines **two retrieval approaches**:
 
 Hybrid ranking improves retrieval stability and robustness.
 
-### Reranking Layer
+## Reranking Layer
 
 An optional reranking stage improves final document ordering.
 
@@ -81,7 +86,7 @@ Capabilities include:
 - hybrid score inspection
 - improved evidence ordering
 
-### Evidence Grounding
+## Evidence Grounding
 
 Each generated answer includes:
 
@@ -91,11 +96,13 @@ Each generated answer includes:
 
 This makes retrieval behavior **transparent and explainable**.
 
+---
+
 # 📊 Retrieval Evaluation
 
 A built-in evaluation dashboard measures retrieval performance.
 
-### Metrics
+## Metrics
 
 | Metric | Purpose |
 |------|--------|
@@ -105,7 +112,7 @@ A built-in evaluation dashboard measures retrieval performance.
 | nDCG | graded relevance evaluation |
 | Grounding Score | quality of answer citations |
 
-### Query-Level Analysis
+## Query-Level Analysis
 
 The evaluation dashboard supports:
 
@@ -115,9 +122,11 @@ The evaluation dashboard supports:
 
 This allows systematic improvement of retrieval pipelines.
 
+---
+
 # 🏗️ System Architecture
 
-### High-Level Retrieval Flow
+## High-Level Retrieval Flow
 
 1. User submits a question  
 2. Query is processed by retrieval engine  
@@ -126,7 +135,7 @@ This allows systematic improvement of retrieval pipelines.
 5. Evidence chunks are attached to answer  
 6. Results are displayed in UI  
 
-### 📐 Production Architecture
+## 📐 Production Architecture
 
 This architecture provides:
 
@@ -134,74 +143,102 @@ This architecture provides:
 - reproducible infrastructure
 - scalable cloud hosting
 
-## 🖼️ Application Screenshots
+### Production Stack
 
-### Streamlit UI — Retrieval Dashboard
+- **Frontend:** Streamlit Cloud
+- **Backend API:** Railway
+- **Database:** Railway PostgreSQL
+- **Custom Domain + DNS:** Cloudflare
+- **Transport:** HTTPS
+- **Documentation:** FastAPI Swagger UI
+
+---
+
+# 🖼️ Application Screenshots
+
+## Streamlit UI — Retrieval Dashboard
 
 <p align="center">
 <img src="docs/screenshots/ui-dashboard.png" width="900">
 </p>
 
-### Query Results with Evidence
+## Query Results with Evidence
 
 <p align="center">
 <img src="docs/screenshots/retrieval-results.png" width="900">
 </p>
 
-### Evaluation Dashboard
+## Evaluation Dashboard
 
 <p align="center">
 <img src="docs/screenshots/evaluation-dashboard.png" width="900">
 </p>
 
-### FastAPI Swagger Documentation
+## FastAPI Swagger Documentation
 
 <p align="center">
 <img src="docs/screenshots/api-docs.png" width="900">
 </p>
 
+---
+
 # 🧰 Technology Stack
 
-### Frontend
+## Frontend
 - Streamlit
 
-### Backend
+## Backend
 - FastAPI
 - Python
 
-### Database
-- PostgreSQL (Neon)
+## Database
+- PostgreSQL (Railway)
 
-### Retrieval Engine
+## Retrieval Engine
 - PostgreSQL Full-Text Search
 - Hybrid retrieval logic
 - Reranking module
 
-### Deployment
+## Evaluation
+- Precision@K
+- Recall@K
+- MRR
+- nDCG
+- Grounding Score
+
+## Deployment
 - Docker
-- Azure App Service
+- Railway
+- Streamlit Cloud
 - Cloudflare DNS + SSL
+
+---
 
 # 🗂️ Repository Structure
 
-# 📈 Why This Project Matters
-
-This repository demonstrates practical skills in:
-
-- retrieval engineering
-- backend API development
-- database-backed RAG systems
-- evaluation-driven AI systems
-- full-stack AI deployment
-
-# 👨‍💻 Author
-
-**Cristian Reynoso-Betancourt**
-
-Part of a broader applied AI portfolio including:
-
-- AI Architecture Designer
-- AI Interview Coach
-- AI Market Coach
-- Retrieval systems and evaluation frameworks
-
+```text
+agentic-sql-rag/
+├── alembic/
+├── app/
+│   ├── agent/
+│   ├── api/
+│   ├── core/
+│   ├── db/
+│   ├── embeddings/
+│   ├── evaluation/
+│   ├── generation/
+│   ├── ingest/
+│   ├── rerank/
+│   ├── retrieval/
+│   ├── schemas/
+│   ├── services/
+│   ├── verification/
+│   └── main.py
+├── assets/
+├── data/
+├── docker/
+├── frontend/
+│   └── streamlit_app.py
+├── requirements.txt
+├── Dockerfile.api
+└── README.md
