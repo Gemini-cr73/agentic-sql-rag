@@ -4,7 +4,7 @@ import os
 import sys
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config, pool
+from sqlalchemy import create_engine, pool
 
 from alembic import context
 
@@ -13,7 +13,6 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Import Base from the real project package
 from app.db.models import Base  # noqa: E402
 
 config = context.config
@@ -21,9 +20,30 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Always prefer DATABASE_URL from environment if present
+
+def _normalize_database_url(url: str) -> str:
+    """
+    Normalize provider URLs for SQLAlchemy + psycopg.
+
+    Railway may provide:
+    - postgres://...
+    - postgresql://...
+
+    We want:
+    - postgresql+psycopg://...
+    """
+    if url.startswith("postgresql+psycopg://"):
+        return url
+    if url.startswith("postgresql://"):
+        return url.replace("postgresql://", "postgresql+psycopg://", 1)
+    if url.startswith("postgres://"):
+        return url.replace("postgres://", "postgresql+psycopg://", 1)
+    return url
+
+
 database_url = os.getenv("DATABASE_URL")
 if database_url:
+    database_url = _normalize_database_url(database_url)
     config.set_main_option("sqlalchemy.url", database_url)
 
 target_metadata = Base.metadata
@@ -44,10 +64,11 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section) or {},
-        prefix="sqlalchemy.",
+    url = config.get_main_option("sqlalchemy.url")
+    connectable = create_engine(
+        url,
         poolclass=pool.NullPool,
+        future=True,
     )
 
     with connectable.connect() as connection:
