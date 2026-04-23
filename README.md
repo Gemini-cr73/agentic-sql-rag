@@ -28,8 +28,6 @@ The system combines **document ingestion, hybrid retrieval, reranking, evidence 
 > These interfaces exist primarily for **demonstration and reproducibility**.  
 > The core contribution is the **retrieval architecture and evaluation system**.
 
----
-
 # 📌 Project Motivation
 
 Many RAG demos appear impressive but fail to provide **transparent retrieval logic or measurable evaluation**.
@@ -50,8 +48,6 @@ Agentic SQL RAG addresses these problems by providing:
 - reproducible cloud deployment
 
 The goal is to treat RAG systems as **engineering systems that can be measured and improved**, not just prompt-based demos.
-
----
 
 # 🧠 Retrieval Engineering Contributions
 
@@ -96,8 +92,6 @@ Each generated answer includes:
 
 This makes retrieval behavior **transparent and explainable**.
 
----
-
 # 📊 Retrieval Evaluation
 
 A built-in evaluation dashboard measures retrieval performance.
@@ -121,8 +115,6 @@ The evaluation dashboard supports:
 - retrieval mode comparison
 
 This allows systematic improvement of retrieval pipelines.
-
----
 
 # 🏗️ System Architecture
 
@@ -152,8 +144,6 @@ This architecture provides:
 - **Transport:** HTTPS
 - **Documentation:** FastAPI Swagger UI
 
----
-
 # 🖼️ Application Screenshots
 
 ## Streamlit UI — Retrieval Dashboard
@@ -179,8 +169,6 @@ This architecture provides:
 <p align="center">
 <img src="docs/screenshots/api-docs.png" width="900">
 </p>
-
----
 
 # 🧰 Technology Stack
 
@@ -211,8 +199,6 @@ This architecture provides:
 - Railway
 - Streamlit Cloud
 - Cloudflare DNS + SSL
-
----
 
 # 🗂️ Repository Structure
 
